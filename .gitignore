@@ -1,0 +1,8 @@
+# Python
+.idea
+
+
+.venv
+
+# Poetry
+poetry.lock
