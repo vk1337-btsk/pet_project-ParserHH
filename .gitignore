@@ -1,8 +1,15 @@
 # Python
 .idea
-
-
-.venv
+*/__pycache__/
+__pycache__/
 
 # Poetry
 poetry.lock
+.venv
+
+# Tests
+
+
+# Database
+config.ini
+

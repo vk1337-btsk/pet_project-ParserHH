@@ -24,3 +24,12 @@ class Mixin:
             Mixin._exchange_rate = [dict(zip(title, info_currency)) for info_currency in exchange_rate[1:]]
 
         return Mixin._exchange_rate
+
+    @staticmethod
+    def convert_currency(exchange_rate: list[dict], salary: float or int, currency: str) -> float or int:
+        """This method converts salary from foreign currency into rubles."""
+        for dict_ in exchange_rate:
+            if dict_['letter_code'] == currency:
+                my_dict = dict_
+                new_salary = salary * float(my_dict['rate'].replace(',', '.')) / int(my_dict['quantity'])
+                return new_salary

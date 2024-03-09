@@ -3,27 +3,23 @@ import random
 import requests
 
 
-class ABC_model_HH(ABC):
+class abc_model_HH(ABC):
+    api_basic_url = 'https://api.hh.ru'
 
-    # Abstract methods
-    # @abstractmethod
-    # def get_headers(self) -> None:
-    #     pass
-    #
-    # @abstractmethod
-    # def get_params(self) -> None:
-    #     pass
-
-    # Static method
     @staticmethod
     def get_time_for_sleep() -> float:
         count_second = random.uniform(0.3, 0.5)
         return count_second
 
-    @staticmethod
-    def get_response(basic_url: str, headers: dict, params: dict) -> dict or Exception:
-        response = requests.get(basic_url, headers=headers, params=params)
+    def get_response(self, basic_url: str = None, sub_url: str = "", headers: dict = None, params: dict = None)\
+            -> dict or Exception:
 
+        if not basic_url:
+            basic_url = self.api_basic_url
+        if not headers:
+            headers = {'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) '
+                                     'Chrome/121.0.0.0 Safari/537.36'}
+        response = requests.get(url=basic_url + sub_url, headers=headers, params=params)
         if bool(response):
             return response.json()
         else:
